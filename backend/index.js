@@ -2,6 +2,10 @@ import 'dotenv/config';
 import express from "express";
 import cors from "cors";
 import { connectDatabase } from "./lib/db.js";
+import { seedProductsIfEmpty } from "./lib/seed.js";
+import productsRouter from "./routes/products.js";
+import cartRouter from "./routes/cart.js";
+import checkoutRouter from "./routes/checkout.js";
 
 const app = express();
 
@@ -12,10 +16,14 @@ app.get("/health", (req, res) => {
   res.json({ status: "ok" });
 });
 
+app.use("/api/products", productsRouter);
+app.use("/api/cart", cartRouter);
+app.use("/api/checkout", checkoutRouter);
 const PORT = process.env.PORT || 3000;
 
 async function start() {
   await connectDatabase();
+  await seedProductsIfEmpty();
   app.listen(PORT, () => {
     console.log(`Server started on http://localhost:${PORT}`);
   });
