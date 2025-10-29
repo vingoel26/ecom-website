@@ -57,17 +57,37 @@ export async function addToCart(userId, productId, qty) {
   return { ok: true };
 }
 
-export async function removeFromCart(userId, productId) {
+export async function removeFromCart(userId, productId, qty) {
   const productObjectId = ensureObjectId(productId);
   if (!productObjectId) {
     const err = new Error("Invalid id");
     err.status = 400;
     throw err;
   }
-  await Cart.updateOne(
-    { userId },
-    { $pull: { items: { product: productObjectId } } }
-  );
+
+  const quantity = qty == null ? null : Number(qty);
+
+  // If no qty provided, remove entire line
+  if (!(quantity > 0)) {
+    await Cart.updateOne(
+      { userId },
+      { $pull: { items: { product: productObjectId } } }
+    );
+    return { ok: true };
+  }
+
+  // Decrement qty, and remove if reached 0
+  const cart = await Cart.findOne({ userId });
+  if (!cart) return { ok: true };
+
+  const item = cart.items.find((i) => i.product.toString() === productObjectId.toString());
+  if (!item) return { ok: true };
+
+  item.qty -= quantity;
+  if (item.qty <= 0) {
+    cart.items = cart.items.filter((i) => i.product.toString() !== productObjectId.toString());
+  }
+  await cart.save();
   return { ok: true };
 }
 

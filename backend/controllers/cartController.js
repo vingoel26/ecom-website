@@ -19,7 +19,8 @@ export async function addItem(req, res) {
 
 export async function removeItem(req, res) {
   try {
-    const result = await removeFromCart(DEMO_USER, req.params.id);
+    const { productId, qty } = req.body || {};
+    const result = await removeFromCart(DEMO_USER, productId, qty);
     res.json(result);
   } catch (err) {
     res.status(err.status || 500).json({ error: err.message || "Failed to remove" });
