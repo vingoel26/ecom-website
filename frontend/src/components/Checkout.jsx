@@ -17,19 +17,19 @@ export function Checkout({ cart, onClose, onSubmit }) {
 
   if (showReceipt && receipt) {
     return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-        <div className="bg-white rounded-lg p-6 max-w-md w-full">
-          <h2 className="text-2xl font-bold mb-4">Receipt</h2>
+      <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
+        <div className="bg-white rounded-xl p-6 max-w-md w-full shadow-xl">
+          <h2 className="text-xl sm:text-2xl font-semibold mb-4">Receipt</h2>
           <div className="space-y-2 mb-4">
             <p><strong>Name:</strong> {name}</p>
             <p><strong>Email:</strong> {email}</p>
             <p><strong>Total:</strong> ₹{receipt.total.toFixed(2)}</p>
             <p><strong>Timestamp:</strong> {new Date(receipt.timestamp).toLocaleString()}</p>
-            <p className="text-green-600 font-semibold">{receipt.message}</p>
+            <p className="text-green-600 font-medium">{receipt.message}</p>
           </div>
           <button
             onClick={onClose}
-            className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition"
+            className="w-full rounded-md bg-blue-600 text-white py-2 px-4 shadow-sm hover:bg-blue-700 transition"
           >
             Close
           </button>
@@ -39,9 +39,9 @@ export function Checkout({ cart, onClose, onSubmit }) {
   }
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-lg p-6 max-w-md w-full">
-        <h2 className="text-2xl font-bold mb-4">Checkout</h2>
+    <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
+      <div className="bg-white rounded-xl p-6 max-w-md w-full shadow-xl">
+        <h2 className="text-xl sm:text-2xl font-semibold mb-4">Checkout</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium mb-1">Name</label>
@@ -50,7 +50,7 @@ export function Checkout({ cart, onClose, onSubmit }) {
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
-              className="w-full border rounded px-3 py-2"
+              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500/60"
             />
           </div>
           
@@ -61,7 +61,7 @@ export function Checkout({ cart, onClose, onSubmit }) {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full border rounded px-3 py-2"
+              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500/60"
             />
           </div>
           
@@ -73,13 +73,13 @@ export function Checkout({ cart, onClose, onSubmit }) {
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 bg-gray-300 text-gray-700 py-2 px-4 rounded hover:bg-gray-400 transition"
+              className="flex-1 rounded-md bg-gray-200 text-gray-800 py-2 px-4 hover:bg-gray-300 transition"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="flex-1 bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 transition"
+              className="flex-1 rounded-md bg-green-600 text-white py-2 px-4 hover:bg-green-700 transition"
             >
               Submit Order
             </button>

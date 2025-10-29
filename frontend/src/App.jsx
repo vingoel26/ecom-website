@@ -49,33 +49,36 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <nav className="bg-white shadow-sm mb-4">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-xl font-bold">Vibe Commerce</h1>
-          <div className="flex gap-4">
+    <div className="min-h-screen bg-linear-to-b from-gray-50 to-white">
+      <header className="border-b bg-white/80 backdrop-blur supports-backdrop-filter:bg-white/60">
+        <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded bg-blue-600" />
+            <h1 className="text-lg sm:text-xl font-semibold tracking-tight">Vibe Commerce</h1>
+          </div>
+          <nav className="flex gap-2 sm:gap-3">
             <button
               onClick={() => setView('products')}
-              className={`px-4 py-2 rounded ${view === 'products' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+              className={`px-3 sm:px-4 py-2 rounded-md text-sm font-medium transition ${view === 'products' ? 'bg-blue-600 text-white shadow-sm' : 'text-gray-700 hover:bg-gray-100'}`}
             >
               Products
             </button>
             <button
               onClick={() => setView('cart')}
-              className={`px-4 py-2 rounded relative ${view === 'cart' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+              className={`px-3 sm:px-4 py-2 rounded-md text-sm font-medium transition relative ${view === 'cart' ? 'bg-blue-600 text-white shadow-sm' : 'text-gray-700 hover:bg-gray-100'}`}
             >
               Cart
               {cart.items.length > 0 && (
-                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] rounded-full min-w-[20px] h-5 px-1 flex items-center justify-center">
                   {cart.items.reduce((sum, it) => sum + (it.qty || 0), 0)}
                 </span>
               )}
             </button>
-          </div>
+          </nav>
         </div>
-      </nav>
+      </header>
 
-      <main>
+      <main className="max-w-6xl mx-auto px-4 py-6">
         {view === 'products' && <Products onAddToCart={addToCart} />}
         {view === 'cart' && (
           <Cart

@@ -24,25 +24,38 @@ export function Products({ onAddToCart }) {
   }, []);
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Products</h1>
-      {loading && <p className="text-gray-500">Loading...</p>}
-      {error && <p className="text-red-600">{error}</p>}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <section className="">
+      <div className="flex items-end justify-between mb-4">
+        <h2 className="text-xl sm:text-2xl font-semibold tracking-tight">Products</h2>
+        {loading && <span className="text-sm text-gray-500">Loading…</span>}
+        {error && <span className="text-sm text-red-600">{error}</span>}
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {products.map((product) => (
-          <div key={product.id} className="border rounded-lg p-4 shadow-sm">
-            <h2 className="text-xl font-semibold mb-2">{product.name}</h2>
-            <p className="text-gray-600 mb-4">₹{product.price.toFixed(2)}</p>
-            <button
-              onClick={() => onAddToCart(product.id, 1)}
-              className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition"
-            >
-              Add to Cart
-            </button>
+          <div
+            key={product.id}
+            className="group rounded-xl border bg-white p-5 shadow-sm transition hover:shadow-md"
+          >
+            <div className="flex items-start justify-between gap-2">
+              <h3 className="text-base font-medium text-gray-900 group-hover:text-gray-700">
+                {product.name}
+              </h3>
+              <span className="text-sm font-semibold text-gray-900">
+                ₹{product.price.toFixed(2)}
+              </span>
+            </div>
+            <div className="mt-4">
+              <button
+                onClick={() => onAddToCart(product.id, 1)}
+                className="w-full inline-flex items-center justify-center rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/70"
+              >
+                Add to Cart
+              </button>
+            </div>
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 }
 
