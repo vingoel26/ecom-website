@@ -18,14 +18,14 @@ export function Checkout({ cart, onClose, onSubmit }) {
   if (showReceipt && receipt) {
     return (
       <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
-        <div className="bg-white rounded-xl p-6 max-w-md w-full shadow-xl">
+        <div className="bg-white rounded-xl p-6 max-w-md w-full shadow-xl dark:bg-gray-900 dark:text-gray-100">
           <h2 className="text-xl sm:text-2xl font-semibold mb-4">Receipt</h2>
           <div className="space-y-2 mb-4">
             <p><strong>Name:</strong> {name}</p>
             <p><strong>Email:</strong> {email}</p>
             <p><strong>Total:</strong> ₹{receipt.total.toFixed(2)}</p>
             <p><strong>Timestamp:</strong> {new Date(receipt.timestamp).toLocaleString()}</p>
-            <p className="text-green-600 font-medium">{receipt.message}</p>
+            <p className="text-green-600 font-medium dark:text-green-400">{receipt.message}</p>
           </div>
           <button
             onClick={onClose}
