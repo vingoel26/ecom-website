@@ -51,12 +51,12 @@ export function Products({ onAddToCart, onOpenDetail }) {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search products…"
-            className="flex-1 rounded-md border px-3 py-2 text-sm dark:bg-gray-900 dark:border-gray-800"
+            className="flex-1 rounded-md border px-3 py-2 text-sm"
           />
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="rounded-md border px-3 py-2 text-sm dark:bg-gray-900 dark:border-gray-800"
+            className="rounded-md border px-3 py-2 text-sm"
           >
             {categories.map((c) => (
               <option key={c} value={c}>{c}</option>
@@ -72,10 +72,10 @@ export function Products({ onAddToCart, onOpenDetail }) {
         {filtered.map((product) => (
           <div
             key={product.id}
-            className="group rounded-xl border bg-white p-5 shadow-sm transition hover:shadow-md dark:bg-gray-900 dark:border-gray-800"
+            className="group rounded-xl border bg-white p-5 shadow-sm transition hover:shadow-md"
           >
             {product.imageUrl && (
-              <div className="mb-4 overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800 w-full h-48 flex items-center justify-center">
+              <div className="mb-4 overflow-hidden rounded-lg bg-gray-100 w-full h-48 flex items-center justify-center">
                 <img
                   src={product.imageUrl}
                   alt={product.name}
@@ -85,17 +85,17 @@ export function Products({ onAddToCart, onOpenDetail }) {
               </div>
             )}
             <div className="flex items-start justify-between gap-2">
-              <h3 className="text-base font-medium text-gray-900 group-hover:text-gray-700 dark:text-gray-100 dark:group-hover:text-gray-300">
+              <h3 className="text-base font-medium text-gray-900 group-hover:text-gray-700">
                 <button onClick={() => onOpenDetail(product.id)} className="text-left hover:underline">
                   {product.name}
                 </button>
               </h3>
-              <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+              <span className="text-sm font-semibold text-gray-900">
                 ₹{product.price.toFixed(2)}
               </span>
             </div>
             {product.category && (
-              <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">{product.category}</p>
+              <p className="mt-1 text-xs text-gray-500">{product.category}</p>
             )}
             <div className="mt-4">
               <button

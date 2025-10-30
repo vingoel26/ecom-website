@@ -18,14 +18,14 @@ export function Checkout({ cart, onClose, onSubmit }) {
   if (showReceipt && receipt) {
     return (
       <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
-        <div className="bg-white rounded-xl p-6 max-w-md w-full shadow-xl dark:bg-gray-900 dark:text-gray-100">
+        <div className="bg-white rounded-xl p-6 max-w-md w-full shadow-xl">
           <h2 className="text-xl sm:text-2xl font-semibold mb-4">Receipt</h2>
           <div className="space-y-2 mb-4">
             <p><strong>Name:</strong> {name}</p>
             <p><strong>Email:</strong> {email}</p>
             <p><strong>Total:</strong> ₹{receipt.total.toFixed(2)}</p>
             <p><strong>Timestamp:</strong> {new Date(receipt.timestamp).toLocaleString()}</p>
-            <p className="text-green-600 font-medium dark:text-green-400">{receipt.message}</p>
+            <p className="text-green-600 font-medium">{receipt.message}</p>
           </div>
           <button
             onClick={onClose}
@@ -40,7 +40,7 @@ export function Checkout({ cart, onClose, onSubmit }) {
 
   return (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-xl p-6 max-w-md w-full shadow-xl dark:bg-gray-900 dark:text-gray-100">
+      <div className="bg-white rounded-xl p-6 max-w-md w-full shadow-xl">
         <h2 className="text-xl sm:text-2xl font-semibold mb-4">Checkout</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -50,10 +50,9 @@ export function Checkout({ cart, onClose, onSubmit }) {
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
-              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500/60 dark:bg-gray-800 dark:border-gray-700"
+              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500/60"
             />
           </div>
-          
           <div>
             <label className="block text-sm font-medium mb-1">Email</label>
             <input
@@ -61,19 +60,17 @@ export function Checkout({ cart, onClose, onSubmit }) {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500/60 dark:bg-gray-800 dark:border-gray-700"
+              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500/60"
             />
           </div>
-          
           <div className="border-t pt-4">
             <p className="text-lg font-semibold mb-4">Total: ₹{total.toFixed(2)}</p>
           </div>
-          
           <div className="flex gap-2">
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 rounded-md bg-gray-200 text-gray-800 py-2 px-4 hover:bg-gray-300 transition dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
+              className="flex-1 rounded-md bg-gray-200 text-gray-800 py-2 px-4 hover:bg-gray-300 transition"
             >
               Cancel
             </button>

@@ -1,10 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import { Products } from './components/Products'
 import { Cart } from './components/Cart'
 import { Checkout } from './components/Checkout'
 import { ProductDetail } from './components/ProductDetail'
-import { useEffect } from 'react'
 import { api } from './api/client'
 
 function App() {
@@ -42,7 +41,6 @@ function App() {
 
   const refreshCart = async () => {
     const data = await api.getCart();
-    // backend returns { items:[{id,name,price,qty}], total }
     setCart({ items: data.items || [] });
   };
 
@@ -50,24 +48,9 @@ function App() {
     refreshCart();
   }, []);
 
-  // TRUE if <html> has class 'dark', else false
-  const [dark, setDark] = useState(() => {
-    return typeof document !== 'undefined' && document.documentElement.classList.contains('dark');
-  });
-  useEffect(() => {
-    const root = document.documentElement;
-    if (dark) {
-      root.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      root.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-  }, [dark]);
-
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
-      <header className="border-b bg-white/80 text-gray-900 dark:bg-gray-900/70 dark:text-gray-100 backdrop-blur supports-backdrop-filter:bg-white/60">
+    <div className="min-h-screen bg-white text-gray-900">
+      <header className="border-b bg-white text-gray-900">
         <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded bg-blue-600" />
@@ -76,13 +59,13 @@ function App() {
           <nav className="flex items-center gap-2 sm:gap-3">
             <button
               onClick={() => setView('products')}
-              className={`px-3 sm:px-4 py-2 rounded-md text-sm font-medium transition ${view === 'products' ? 'bg-blue-600 text-white shadow-sm' : 'text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800'}`}
+              className={`px-3 sm:px-4 py-2 rounded-md text-sm font-medium transition ${view === 'products' ? 'bg-blue-600 text-white shadow-sm' : 'text-gray-700 hover:bg-gray-100'}`}
             >
               Products
             </button>
             <button
               onClick={() => setView('cart')}
-              className={`px-3 sm:px-4 py-2 rounded-md text-sm font-medium transition relative ${view === 'cart' ? 'bg-blue-600 text-white shadow-sm' : 'text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800'}`}
+              className={`px-3 sm:px-4 py-2 rounded-md text-sm font-medium transition relative ${view === 'cart' ? 'bg-blue-600 text-white shadow-sm' : 'text-gray-700 hover:bg-gray-100'}`}
             >
               Cart
               {cart.items.length > 0 && (
@@ -91,23 +74,14 @@ function App() {
                 </span>
               )}
             </button>
-            <button
-              onClick={() => setDark((v) => !v)}
-              className="px-3 py-2 rounded-md text-sm font-medium transition text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800"
-              aria-label="Toggle theme"
-              title={dark ? 'Switch to light' : 'Switch to dark'}
-            >
-              {dark ? "Dark Mode" : 'Light Mode'}
-            </button>
-            <div className="flex items-center gap-2 pl-2 ml-2 border-l border-gray-200 dark:border-gray-800">
+            <div className="flex items-center gap-2 pl-2 ml-2 border-l border-gray-200">
               <div className="w-8 h-8 rounded-full bg-linear-to-br from-blue-500 to-purple-600 text-white flex items-center justify-center text-sm font-semibold">DU</div>
               <span className="hidden sm:block text-sm font-medium">Demo User</span>
             </div>
           </nav>
         </div>
       </header>
-
-      <main className="max-w-6xl mx-auto px-4 py-6 bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
+      <main className="max-w-6xl mx-auto px-4 py-6 bg-white text-gray-900">
         {view === 'products' && <Products onAddToCart={addToCart} onOpenDetail={(id) => { setDetailId(id); setView('detail'); }} />}
         {view === 'cart' && (
           <Cart
@@ -125,7 +99,6 @@ function App() {
           />)
         }
       </main>
-
       {showCheckout && (
         <Checkout
           cart={cart}
