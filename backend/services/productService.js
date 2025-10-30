@@ -6,9 +6,24 @@ export async function getAllProducts() {
     id: p._id.toString(),
     name: p.name,
     price: p.price,
-    description: p.description,
-    imageUrl: p.imageUrl,
+    imageUrl: p.imageUrl || "",
+    category: p.category || "",
+    rating: p.rating || { rate: 0, count: 0 },
   }));
+}
+
+export async function getProductById(id) {
+  const p = await Product.findById(id).lean();
+  if (!p) return null;
+  return {
+    id: p._id.toString(),
+    name: p.name,
+    price: p.price,
+    imageUrl: p.imageUrl || "",
+    description: p.description || "",
+    category: p.category || "",
+    rating: p.rating || { rate: 0, count: 0 },
+  };
 }
 
 

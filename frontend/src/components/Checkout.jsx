@@ -40,7 +40,7 @@ export function Checkout({ cart, onClose, onSubmit }) {
 
   return (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-xl p-6 max-w-md w-full shadow-xl">
+      <div className="bg-white rounded-xl p-6 max-w-md w-full shadow-xl dark:bg-gray-900 dark:text-gray-100">
         <h2 className="text-xl sm:text-2xl font-semibold mb-4">Checkout</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -50,7 +50,7 @@ export function Checkout({ cart, onClose, onSubmit }) {
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
-              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500/60"
+              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500/60 dark:bg-gray-800 dark:border-gray-700"
             />
           </div>
           
@@ -61,7 +61,7 @@ export function Checkout({ cart, onClose, onSubmit }) {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500/60"
+              className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500/60 dark:bg-gray-800 dark:border-gray-700"
             />
           </div>
           
@@ -73,7 +73,7 @@ export function Checkout({ cart, onClose, onSubmit }) {
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 rounded-md bg-gray-200 text-gray-800 py-2 px-4 hover:bg-gray-300 transition"
+              className="flex-1 rounded-md bg-gray-200 text-gray-800 py-2 px-4 hover:bg-gray-300 transition dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
             >
               Cancel
             </button>

@@ -22,6 +22,9 @@ export const api = {
   getProducts() {
     return http("GET", "/api/products");
   },
+  getProduct(id) {
+    return http("GET", `/api/products/${id}`);
+  },
   getCart() {
     return http("GET", "/api/cart");
   },

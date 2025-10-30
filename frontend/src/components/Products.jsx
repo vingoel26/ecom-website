@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { api } from "../api/client.js";
 
-export function Products({ onAddToCart }) {
+export function Products({ onAddToCart, onOpenDetail }) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -34,13 +34,20 @@ export function Products({ onAddToCart }) {
         {products.map((product) => (
           <div
             key={product.id}
-            className="group rounded-xl border bg-white p-5 shadow-sm transition hover:shadow-md"
+            className="group rounded-xl border bg-white p-5 shadow-sm transition hover:shadow-md dark:bg-gray-900 dark:border-gray-800"
           >
+            {product.imageUrl && (
+              <div className="mb-4 aspect-square overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800">
+                <img src={product.imageUrl} alt={product.name} className="h-full w-full object-cover object-center group-hover:scale-[1.02] transition" />
+              </div>
+            )}
             <div className="flex items-start justify-between gap-2">
-              <h3 className="text-base font-medium text-gray-900 group-hover:text-gray-700">
-                {product.name}
+              <h3 className="text-base font-medium text-gray-900 group-hover:text-gray-700 dark:text-gray-100 dark:group-hover:text-gray-300">
+                <button onClick={() => onOpenDetail(product.id)} className="text-left hover:underline">
+                  {product.name}
+                </button>
               </h3>
-              <span className="text-sm font-semibold text-gray-900">
+              <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
                 ₹{product.price.toFixed(2)}
               </span>
             </div>

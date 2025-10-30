@@ -6,6 +6,7 @@ import { seedProductsIfEmpty } from "./lib/seed.js";
 import productsRouter from "./routes/products.js";
 import cartRouter from "./routes/cart.js";
 import checkoutRouter from "./routes/checkout.js";
+import { notFound, errorHandler } from "./middleware/error.js";
 
 const app = express();
 
@@ -19,6 +20,10 @@ app.get("/health", (req, res) => {
 app.use("/api/products", productsRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/checkout", checkoutRouter);
+
+// 404 and error handling
+app.use(notFound);
+app.use(errorHandler);
 const PORT = process.env.PORT || 3000;
 
 async function start() {
