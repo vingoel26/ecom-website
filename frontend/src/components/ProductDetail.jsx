@@ -34,13 +34,13 @@ export function ProductDetail({ productId, onBack, onAddToCart }) {
       </div>
       <div>
         <button onClick={onBack} className="text-sm text-blue-600 hover:underline mb-4">← Back</button>
-        <h1 className="text-2xl font-semibold mb-2 dark:text-gray-100">{product.name}</h1>
-        <p className="text-lg font-semibold mb-2 dark:text-gray-100">₹{product.price.toFixed(2)}</p>
-        {product.category && <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Category: {product.category}</p>}
+        <h1 className="text-2xl text-black font-semibold mb-2">{product.name}</h1>
+        <p className="text-lg font-semibold mb-2 text-gray-600">₹{product.price.toFixed(2)}</p>
+        {product.category && <p className="text-sm text-gray-600 mb-2">Category: {product.category}</p>}
         {product.rating && (
-          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">Rating: {product.rating.rate} ({product.rating.count})</p>
+          <p className="text-sm text-gray-600 mb-4">Rating: {product.rating.rate} ({product.rating.count})</p>
         )}
-        {product.description && <p className="text-gray-700 dark:text-gray-300 mb-6">{product.description}</p>}
+        {product.description && <p className="text-gray-700 mb-6">{product.description}</p>}
 
         <div className="flex gap-2">
           <button
